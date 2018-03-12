@@ -27,43 +27,46 @@
 // 1 - played 0
 // 2 - played X
 
-// Create an array to store board state, with positions as follows
+// Create an array to store board state, with positions as follows (position 0 is not used)
 // 1 2 3
 // 4 5 6
 // 7 8 9
 
-let bArray = [
-    0,0,0,     
-    0,0,0,     
-    0,0,0      
+var bArray = 
+[0,
+    0,0,0,
+    0,0,0,
+    0,0,0
 ];
 
 // Variable to capture whose turn it is
 // 0 = player 0
 // 1 = player X
 
-let turnVar = 0;
-let turnTaken = 0;
+var turnVar = 0;
+var turnTaken = 0;
 var alertString = "";
+var gameEnded = false;
 
 function setListener() {
-    for (let i = 1; i < 10; i++) {
+    for (let i = 1; i <= 9; i++) {
         document.getElementById(i).addEventListener('click',function() {clickChecker(i)});
     }
 }
 
 function clickChecker(i2) {
-    if (bArray[i2] === 0 && turnVar === 0) {
-        document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
-        bArray[i2] = 1;
-        checkForWin();
+    if (!gameEnded) {
+        if (bArray[i2] === 0 && turnVar === 0) {
+            document.getElementById(i2.toString()).setAttribute("src", "images/nought.png");
+            bArray[i2] = 1;
+            checkForWin();
+        }
+        else if (bArray[i2] === 0 && turnVar === 1) {
+            document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
+            bArray[i2] = 2;
+            checkForWin();
+        }
     }
-    else if (bArray[i2] === 0 && turnVar === 1) {
-        document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
-        bArray[i2] = 2;
-        checkForWin();
-    }
-
 }
 
 // Checks array for a win condition
@@ -85,12 +88,6 @@ function checkForWin() {
     else {turnVar = 0}
 }
 
-// window.onload = function sendResult() {
-//     if (alertString != "") {
-//         alert(alertString);
-//     }
-// }
-
 function gameOver() {
     if (turnVar === 0) {
         alertString = 'Noughts wins!';
@@ -98,14 +95,14 @@ function gameOver() {
     else {
         alertString = 'Crosses wins!';
     }
-    for (let i3 = 1; i3 < 10; i3++) {
-        document.getElementById(i3).removeEventListener('click',function() {clickChecker(i3)});
-    }
-    console.log(alertString);
+    // for (let i3 = 1; i3 < 10; i3++) {
+    //     document.getElementById(i3).removeEventListener('click',function() {clickChecker(i3)});
+    // }
+    var winVarOne = document.getElementsByClassName("wintext");
+    winVarOne[0].innerHTML = alertString;
+    gameEnded = true;
 }
-
 setListener();
-
 
 // CODE DUMP - not in use
 
@@ -126,12 +123,14 @@ setListener();
       
 // var element = document.getElementById("pos0");
 
-// var var1 = document.getElementById("pos0");
-// var1.addEventListener('click',clickRun(0));
+// var var1 = document.getElementById("hello");
+// var1.addEventListener('click',clickRun);
 
-// function clickRun(clickPos) {
-//     alert("hello");
+// function clickRun(var4) {
+//     console.log(var4);
+//     console.log("in function");
 // }
+
 // function boardPrinter() {
 //     var boardString = "";
 //     for (let i = 0; i < tBoardArray.length; i++) {
@@ -166,3 +165,8 @@ setListener();
 //     linky.parentNode.insertBefore(newElement, linky.nextSibling);
 // }
 
+// window.onload = function sendResult() {
+//     if (alertString != "") {
+//         alert(alertString);
+//     }
+// }

@@ -1,4 +1,27 @@
 * {
     background-color: lightskyblue;
     color: red;
+    font-family: 'Itim', cursive;
+}
+
+li {
+    list-style-type: none;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+}
+
+.gameBoard {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}
+
+.wintext {
+    float: right;
+    font-size: 25px;
+    text-decoration: wavy;
+    position: fixed;
+    right: 87px;
+    top: 144px;
 }
