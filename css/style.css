@@ -1,5 +1,6 @@
-* {
-    background-color: lightskyblue;
+body {
+    
+    background-color: darkblue;
     color: red;
     font-family: 'Itim', cursive;
 }
@@ -12,16 +13,13 @@ li {
 }
 
 .gameBoard {
-    margin-left:auto;
+    margin-left:50px;
     margin-right:auto;
     width:960px;
 }
 
-.wintext {
-    float: right;
-    font-size: 25px;
+.turnFollow, .textToPlayer {
+    font-size: 30px;
     text-decoration: wavy;
-    position: fixed;
-    right: 87px;
-    top: 144px;
 }
+

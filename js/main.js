@@ -44,9 +44,13 @@ var bArray =
 // 1 = player X
 
 var turnVar = 0;
+
+// Declare global variables
+
 var turnTaken = 0;
 var alertString = "";
 var gameEnded = false;
+var winVarOne = document.getElementsByClassName("textToPlayer");
 
 function setListener() {
     for (let i = 1; i <= 9; i++) {
@@ -59,19 +63,20 @@ function clickChecker(i2) {
         if (bArray[i2] === 0 && turnVar === 0) {
             document.getElementById(i2.toString()).setAttribute("src", "images/nought.png");
             bArray[i2] = 1;
-            checkForWin();
         }
         else if (bArray[i2] === 0 && turnVar === 1) {
             document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
             bArray[i2] = 2;
-            checkForWin();
         }
+        checkForWin();
+        checkStaleMate();
+        if (gameEnded) {reStarter()}
+        else {displayNextTurn()};
     }
 }
 
-// Checks array for a win condition
-
 function checkForWin() {
+    console.log("riunning check");
     let tVar = turnVar + 1;
     if ((bArray[1] === tVar && bArray[2] === tVar && bArray[3] === tVar) ||
         (bArray[4] === tVar && bArray[5] === tVar && bArray[6] === tVar) ||
@@ -82,29 +87,91 @@ function checkForWin() {
         (bArray[1] === tVar && bArray[5] === tVar && bArray[9] === tVar) ||
         (bArray[3] === tVar && bArray[5] === tVar && bArray[7] === tVar))
         {
-            gameOver();
+            haveWinner();
         }
     if (turnVar === 0) {turnVar = 1}
     else {turnVar = 0}
 }
 
-function gameOver() {
+function displayNextTurn() {
+    var turnShow = document.getElementsByClassName("turnFollow");
+    if (turnVar === 0) {
+        turnShow[0].innerHTML = "Noughts' turn";
+    }
+    else {
+        turnShow[0].innerHTML = "Crosses' turn";
+    }
+}
+
+function haveWinner() {
     if (turnVar === 0) {
         alertString = 'Noughts wins!';
     }
     else {
         alertString = 'Crosses wins!';
     }
-    // for (let i3 = 1; i3 < 10; i3++) {
-    //     document.getElementById(i3).removeEventListener('click',function() {clickChecker(i3)});
-    // }
-    var winVarOne = document.getElementsByClassName("wintext");
     winVarOne[0].innerHTML = alertString;
     gameEnded = true;
 }
+
+var checkStaleMate = function() {
+    for (let i3 = 1; i3 <= 9; i3++) {
+        if (bArray[i3] === 0) { 
+            return false;
+        }
+    }
+    winVarOne[0] = "Nobody won. Super lame. Try harder next time people.";
+    gameEnded = true;
+    return true;
+}
+
+function reStarter() {
+    $.confirm({
+        content: 'Would you like to play this remarkable game again?',
+        boxWidth: '350px',
+        buttons: {
+            yes: {
+                text: 'Of course I do',
+                action: clearGame
+            },
+            no: {
+                text: 'Nope',
+                action: goAwayNow
+            },
+        }
+    });
+}
+
+function clearGame() {
+    // reset all vars
+
+    bArray = [0,0,0,0,0,0,0,0,0,0];
+    turnVar = 0;
+    turnTaken = 0;
+    alertString = "";
+    gameEnded = false;
+    winVarOne = document.getElementsByClassName("textToPlayer");
+    
+    // rebuild the board
+
+    for (let i = 1; i <= 9; i++) {
+        document.getElementById(i).setAttribute("src", "images/basesquare.png");
+    }
+
+    setListener();
+}
+
+function goAwayNow() {
+    window.location.replace("https://www.sadanduseless.com/2018/03/sad/");
+}
+
 setListener();
 
-// CODE DUMP - not in use
+// CODE DUMP - this code is not in use, parked for later re-use
+
+// for (let i3 = 1; i3 < 10; i3++) {
+//     document.getElementById(i3).removeEventListener('click',function() {clickChecker(i3)});
+// }
 
 // document.getElementsByName("img")
 
@@ -168,5 +235,13 @@ setListener();
 // window.onload = function sendResult() {
 //     if (alertString != "") {
 //         alert(alertString);
+//     }
+// }
+
+// window.onload = function() {
+//     if (window.jQuery) {  
+//         console.log("jquery working");
+//     } else {
+//         console.log("jquery missing");
 //     }
 // }
