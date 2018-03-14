@@ -44,9 +44,10 @@ var bArray =
 // 1 = player X
 
 var turnVar = 0;
-var gameOver = false;
 
-// Declare global variables
+// Variable to capture game over condition
+
+var gameOver = false;
 
 var playerMessage = document.getElementsByClassName("textToPlayer");
 playerMessage[0].innerHTML = "Noughts goes first...";
@@ -76,8 +77,6 @@ function clickChecker(i2) {
 }
 
 function displayNextTurn() {
-    console.log('display next turn about to happen now');
-    console.log(turnVar);
     if (turnVar === 1) {
         playerMessage[0].innerHTML = "Noughts' turn";
         turnVar = 0;
@@ -144,7 +143,6 @@ function reStarter() {
 
 function clearGame() {
     // rebuild the board
-
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).setAttribute("src", "images/basesquare.png");
     }
@@ -156,7 +154,7 @@ function clearGame() {
     bArray = [0,0,0,0,0,0,0,0,0,0];
     turnVar = 0;
     tVar = 0;
-    // setListener();
+
 }
 
 function goAwayNow() {
