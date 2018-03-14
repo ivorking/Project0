@@ -44,13 +44,12 @@ var bArray =
 // 1 = player X
 
 var turnVar = 0;
+var gameOver = false;
 
 // Declare global variables
 
-var turnTaken = 0;
-var alertString = "";
-var gameEnded = false;
-var winVarOne = document.getElementsByClassName("textToPlayer");
+var playerMessage = document.getElementsByClassName("textToPlayer");
+playerMessage[0].innerHTML = "Noughts goes first...";
 
 function setListener() {
     for (let i = 1; i <= 9; i++) {
@@ -59,9 +58,9 @@ function setListener() {
 }
 
 function clickChecker(i2) {
-    if (!gameEnded) {
+    if (!gameOver) {
         if (bArray[i2] === 0 && turnVar === 0) {
-            document.getElementById(i2.toString()).setAttribute("src", "images/nought.png");
+            document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
             bArray[i2] = 1;
         }
         else if (bArray[i2] === 0 && turnVar === 1) {
@@ -70,13 +69,26 @@ function clickChecker(i2) {
         }
         checkForWin();
         checkStaleMate();
-        if (gameEnded) {reStarter()}
-        else {displayNextTurn()};
+        if (!gameOver) {
+            displayNextTurn();
+        }
+    }
+}
+
+function displayNextTurn() {
+    console.log('display next turn about to happen now');
+    console.log(turnVar);
+    if (turnVar === 1) {
+        playerMessage[0].innerHTML = "Noughts' turn";
+        turnVar = 0;
+    }
+    else {
+        playerMessage[0].innerHTML = "Crosses' turn";
+        turnVar = 1;
     }
 }
 
 function checkForWin() {
-    console.log("riunning check");
     let tVar = turnVar + 1;
     if ((bArray[1] === tVar && bArray[2] === tVar && bArray[3] === tVar) ||
         (bArray[4] === tVar && bArray[5] === tVar && bArray[6] === tVar) ||
@@ -89,51 +101,39 @@ function checkForWin() {
         {
             haveWinner();
         }
-    if (turnVar === 0) {turnVar = 1}
-    else {turnVar = 0}
-}
-
-function displayNextTurn() {
-    var turnShow = document.getElementsByClassName("turnFollow");
-    if (turnVar === 0) {
-        turnShow[0].innerHTML = "Noughts' turn";
-    }
-    else {
-        turnShow[0].innerHTML = "Crosses' turn";
-    }
 }
 
 function haveWinner() {
     if (turnVar === 0) {
-        alertString = 'Noughts wins!';
+        playerMessage[0].innerHTML = 'Noughts wins!';
     }
     else {
-        alertString = 'Crosses wins!';
+        playerMessage[0].innerHTML = 'Crosses wins!';
     }
-    winVarOne[0].innerHTML = alertString;
-    gameEnded = true;
+    gameOver = true;
+    reStarter();
 }
 
-var checkStaleMate = function() {
+function checkStaleMate() {
     for (let i3 = 1; i3 <= 9; i3++) {
         if (bArray[i3] === 0) { 
-            return false;
+            return;
         }
     }
-    winVarOne[0] = "Nobody won. Super lame. Try harder next time people.";
-    gameEnded = true;
-    return true;
+    playerMessage[0].innerHTML = "Nobody won. Super lame. Try harder next time people.";
+    gameOver = true;
+    reStarter();
 }
 
 function reStarter() {
     $.confirm({
+        title: 'Game over!',
         content: 'Would you like to play this remarkable game again?',
         boxWidth: '350px',
         buttons: {
             yes: {
                 text: 'Of course I do',
-                action: clearGame
-            },
+                action: clearGame,                    },
             no: {
                 text: 'Nope',
                 action: goAwayNow
@@ -143,22 +143,20 @@ function reStarter() {
 }
 
 function clearGame() {
-    // reset all vars
-
-    bArray = [0,0,0,0,0,0,0,0,0,0];
-    turnVar = 0;
-    turnTaken = 0;
-    alertString = "";
-    gameEnded = false;
-    winVarOne = document.getElementsByClassName("textToPlayer");
-    
     // rebuild the board
 
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).setAttribute("src", "images/basesquare.png");
     }
 
-    setListener();
+    gameOver = false;
+    playerMessage[0].innerHTML = "Noughts goes first...";
+
+    // reset all vars
+    bArray = [0,0,0,0,0,0,0,0,0,0];
+    turnVar = 0;
+    tVar = 0;
+    // setListener();
 }
 
 function goAwayNow() {
@@ -166,82 +164,3 @@ function goAwayNow() {
 }
 
 setListener();
-
-// CODE DUMP - this code is not in use, parked for later re-use
-
-// for (let i3 = 1; i3 < 10; i3++) {
-//     document.getElementById(i3).removeEventListener('click',function() {clickChecker(i3)});
-// }
-
-// document.getElementsByName("img")
-
-// function clickRunner(event) {
-//     xPos = event.clientX;
-//     yPos = event.clientY;
-//     console.log(xPos,yPos);
-//     // if (xPos > 15 && xPos < 258) {
-//     //       }  if (yPos > 93 && yPos )
-
-//     //  =
-//     //   "clientX: " + event.clientX +
-//     //   " - clientY: " + event.clientY;
-//   }
-//   window.onload = function() {
-      
-// var element = document.getElementById("pos0");
-
-// var var1 = document.getElementById("hello");
-// var1.addEventListener('click',clickRun);
-
-// function clickRun(var4) {
-//     console.log(var4);
-//     console.log("in function");
-// }
-
-// function boardPrinter() {
-//     var boardString = "";
-//     for (let i = 0; i < tBoardArray.length; i++) {
-//         boardString = boardString + tBoardArray[i] + " ";
-//         if (i === 2 || i === 5) {
-//             boardString = boardString + "<br>";
-//         }
-//     }
-//     return boardString;
-// }
-// document.getElementById('gameBoard').innerHTML = boardPrinter();
-
-// window.prompt()
-
-// createBoard.innerHTML = tBoardArray;
-// document.body.appendChild(createBoard); 
-
-// var boardArray = document.getElementById["gameBoard"];
-// boardArray.innerHTML = "muggins";
-// document.getElementById("gameBoard").innerHTML = "Paragraph changed!";
-// boardArray = "muggins";
-
-// var imgArray = document.querySelectorAll('a');
-// for (let index = 0; index < imgArray.length; index++) {
-//     var currentHREF = imgArray[index].getAttribute('href');
-//     var newElement = document.createElement('a');
-//     var newElement2 = document.createElement('img');
-//     newElement.appendChild(newElement2);
-//     newElement.href = currentHREF;
-//     newElement2.src = picThumb;
-//     var linky = document.getElementsByTagName('li')[index];
-//     linky.parentNode.insertBefore(newElement, linky.nextSibling);
-// }
-
-// window.onload = function sendResult() {
-//     if (alertString != "") {
-//         alert(alertString);
-//     }
-// }
-
-// window.onload = function() {
-//     if (window.jQuery) {  
-//         console.log("jquery working");
-//     } else {
-//         console.log("jquery missing");
-//     }
-// }
