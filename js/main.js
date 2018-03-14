@@ -47,9 +47,11 @@ var turnVar = 0;
 // Declaring other variables
 
 var gameOver = false;
-var scores = document.getElementsByClassName("scoreTrack");
-var noughtScore = 0;
-var crossScore = 0;
+
+var noughtsScore = document.getElementById("noughts");
+var crossesScore = document.getElementById("crosses");
+var noughts = 0;
+var crosses = 0;
 var playerMessage = document.getElementsByClassName("textToPlayer");
 playerMessage[0].innerHTML = "Noughts goes first...";
 
@@ -106,9 +108,13 @@ function checkForWin() {
 function haveWinner() {
     if (turnVar === 0) {
         playerMessage[0].innerHTML = 'Noughts wins!';
+        noughts++;
+        noughtsScore.innerHTML = `Noughts score: ${noughts}`;
     }
     else {
         playerMessage[0].innerHTML = 'Crosses wins!';
+        crosses++;
+        crossesScore.innerHTML = `Crosses score: ${crosses}`;
     }
     gameOver = true;
     reStarter();

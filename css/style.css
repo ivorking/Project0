@@ -1,19 +1,27 @@
 body {
-    background-color: darkblue;
-    color: red;
-    font-family: 'Itim', cursive;
+    color:     font-family: 'Itim', cursive;
+    height: 100%;
+    width: 100%;
+    margin-left: 60px;
 }
 
-.gameBoard {
+
+h1 {
+    text-shadow: 0 0 5px #FF0000;
+    font-size: 35px;
+}
+
+
+div.gameBoard {
     display: inline-block;
     width: 780px;
     height: 600px;
 }
 
-.gameBoard ul li {
+div.gameBoard ul li {
     display: flex;
     padding: 0px;
-    margin: 0px;
+    align-content: center;
 }
 
 div.scoreTrack {
@@ -25,6 +33,7 @@ div.scoreTrack {
     text-align: right;
     vertical-align: top;
     padding: 0px;
+    font-size: 20px;
 }
 
 li {
@@ -32,10 +41,43 @@ li {
 }
 
 div.wrapper {
-    width: 2000px;
+    width: 100%;
+    height: 100%;
 }
 
-.textToPlayer {
+.boardBackground {
+    opacity: 0.8;
+}
+
+div.imagewrap {
+    height: 100%;
+    width: 100%;
+}
+
+.imagewrap .content{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+div.textToPlayer {
     font-size: 30px;
+    color: blue;
+}
+
+.imagewrap::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url("bak.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left top;
+    opacity: 0.5;
+    z-index: -1;
 }
 
