@@ -1,25 +1,41 @@
 body {
-    
     background-color: darkblue;
     color: red;
     font-family: 'Itim', cursive;
 }
 
-li {
-    list-style-type: none;
+.gameBoard {
+    display: inline-block;
+    width: 780px;
+    height: 600px;
+}
+
+.gameBoard ul li {
     display: flex;
     padding: 0px;
     margin: 0px;
 }
 
-.gameBoard {
-    margin-left:50px;
-    margin-right:auto;
-    width:960px;
+div.scoreTrack {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    width: 200px;
+    height: 50px;
+    text-align: right;
+    vertical-align: top;
+    padding: 0px;
 }
 
-.turnFollow, .textToPlayer {
+li {
+    list-style-type: none;
+}
+
+div.wrapper {
+    width: 2000px;
+}
+
+.textToPlayer {
     font-size: 30px;
-    text-decoration: wavy;
 }
 

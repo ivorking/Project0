@@ -19,7 +19,6 @@
 // Deploy your game online, where the rest of the world can access it
 // Use semantic markup for HTML and CSS (adhere to best practices)
 
-
 // VARIABLES
 
 // Board setup involves
@@ -45,10 +44,12 @@ var bArray =
 
 var turnVar = 0;
 
-// Variable to capture game over condition
+// Declaring other variables
 
 var gameOver = false;
-
+var scores = document.getElementsByClassName("scoreTrack");
+var noughtScore = 0;
+var crossScore = 0;
 var playerMessage = document.getElementsByClassName("textToPlayer");
 playerMessage[0].innerHTML = "Noughts goes first...";
 
@@ -132,7 +133,8 @@ function reStarter() {
         buttons: {
             yes: {
                 text: 'Of course I do',
-                action: clearGame,                    },
+                action: clearGame,
+            },
             no: {
                 text: 'Nope',
                 action: goAwayNow
@@ -154,7 +156,6 @@ function clearGame() {
     bArray = [0,0,0,0,0,0,0,0,0,0];
     turnVar = 0;
     tVar = 0;
-
 }
 
 function goAwayNow() {
