@@ -231,6 +231,13 @@ function AImove() {
         }
     }   
 
+    // check centre free, if free then play there
+    if (bArray[5] === 0) {
+        document.getElementById("5").setAttribute("src","images/cross.png");
+        bArray[5] = 2;
+        return;
+    }
+
     // default to play random move    
     let compMove = Math.floor(getRandom(0,bArrayBlanksCounter)) + 1;
     for (let i7 = 1; i7 <= bArray.length; i7++) {

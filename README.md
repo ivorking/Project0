@@ -18,8 +18,8 @@ Build an application to a spec that someone else gives you
 Build a dynamic game that allows two players to compete
 Craft a readme.md file that explains your app to the world
 Technical Requirements
-Your app must:
 
+Your app must:
 Render a game board in the browser
 Switch turns between X and O (or whichever markers you select)
 Visually display which side won if a player gets three in a row or show a draw/"cat’s game" if neither wins
