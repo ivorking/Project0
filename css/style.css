@@ -3,18 +3,34 @@ body {
     height: 100%;
     width: 100%;
     margin-left: 60px;
+    min-width: 800px;
 }
 
 h1 {
-    text-shadow: 0 0 5px hsl(9, 100%, 50%);
-    font-size: 35px;
+    text-shadow: 4px 4px 4px black;
+    font-size: 42px;
+    color: whitesmoke;
+}
+
+div.picinfo {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    width: 330px;
+    height: 25px;
+    text-align: right bottom;
+    vertical-align: bottom;
+    bottom: 1px;
+    padding: 0px;
+    font-size: 20x;
+    color: blue;
 }
 
 div.gameBoard {
     display: inline-block;
     width: 780px;
     height: 600px;
-    margin-right: 150px;
+    margin-right: 95px;
 }
 
 div.gameBoard ul li {
@@ -62,7 +78,8 @@ div.imagewrap {
 }
 
 div.textToPlayer {
-    font-size: 30px;
+    font-size: 32px;
+    font-weight: bold;
     color: blue;
 }
 

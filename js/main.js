@@ -1,35 +1,18 @@
-// TASK
+// Tic Tac Toe - Championship Edition
+// By Ivor King 2018
+// Licence WTFPL
+// All images owned by the author or licensed for reuse with modification.
 
-// Big Goals
-// Build a web application from scratch, without a starter codebase
-// Use your programming skills to map out the game logic for a simple game like Tic Tac Toe
-// Separate HTML, CSS, and JavaScript files in your application
-// Build an application to a spec that someone else gives you
-// Build a dynamic game that allows two players to compete
-// Craft a readme.md file that explains your app to the world
-// Technical Requirements
-// Your app must:
-
-// Render a game board in the browser
-// Switch turns between X and O (or whichever markers you select)
-// Visually display which side won if a player gets three in a row or show a draw/"cat’s game" if neither wins
-// Include separate HTML / CSS / JavaScript files
-// Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
-// Use Javascript for DOM manipulation
-// Deploy your game online, where the rest of the world can access it
-// Use semantic markup for HTML and CSS (adhere to best practices)
-
-// VARIABLES
-
-// Board setup involves
-// 0 - nothing played
-// 1 - played 0
-// 2 - played X
-
-// Create an array to store board state, with positions as follows (position 0 is not used)
+// key variables
+// create an array to store board state, with positions as follows (position 0 is not used)
 // 1 2 3
 // 4 5 6
 // 7 8 9
+
+// board setup as array values
+// 0 - nothing played
+// 1 - played 0
+// 2 - played X
 
 var bArray = 
 [0,
@@ -38,69 +21,61 @@ var bArray =
     0,0,0
 ];
 
-// Variable to capture whose turn it is
+// variable to capture whose turn it is
 // 0 = player 0
 // 1 = player X
 
 var turnVar = 0;
 
-// Declaring other variables
+// declaring other global game variables
 
 var gameOver = false;
-
+var AIgame = false;
 var noughtsScore = document.getElementById("noughts");
 var crossesScore = document.getElementById("crosses");
 var noughts = 0;
 var crosses = 0;
 var playerMessage = document.getElementsByClassName("textToPlayer");
-var AIgame = false;
-var emptySpaces = 0;
-var posCounter = 1;
-var bArrayBlanksCounter = 0;
-
 playerMessage[0].innerHTML = "Noughts goes first...";
 
 function setListener() {
     for (let i = 1; i <= 9; i++) {
-        document.getElementById(i).addEventListener('click',function() {clickChecker(i)});
+        document.getElementById(i).addEventListener('click',function() {
+            clickChecker(i);
+        });
     }
 }
 
 function clickChecker(i2) {
     if (!gameOver) {
         if (!AIgame) {
-            if (bArray[i2] === 0 && turnVar === 0) {
+            if ((bArray[i2] === 0) && (turnVar === 0)) {
                 document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
                 bArray[i2] = 1;
             }
-            else if (bArray[i2] === 0 && turnVar === 1) {
+            else if ((bArray[i2] === 0) && (turnVar === 1)) {
                 document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
                 bArray[i2] = 2;
             }
-            checkForWin();
-            checkStaleMate();
-            if (!gameOver) {
-                displayNextTurn();
-            }            
+            if (checkForWin(turnVar + 1)) {haveWinner()};
+            if (!gameOver) {checkStaleMate()};
+            if (!gameOver) {displayNextTurn()};            
         }
-        else if (AIgame === true) {
-            if (bArray[i2] === 0 && turnVar === 0) {
+        else if (AIgame) {
+            if ((bArray[i2] === 0) && (turnVar === 0)) {
                 document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
                 bArray[i2] = 1;
-                checkForWin();
-                checkStaleMate();
+                if (checkForWin(turnVar + 1)) {haveWinner()}
+                if (!gameOver) {checkStaleMate()}
+                if (!gameOver) {displayNextTurn()}
+                if (!gameOver) {AImove()}
                 if (!gameOver) {
-                    displayNextTurn();
+                    if (checkForWin(turnVar + 1)) {
+                        haveWinner();
+                    }
                 }
-                AImove();
-                console.log("stepped");
-                checkForWin();
-                console.log("stepped");
-                checkStaleMate();
-                console.log("stepped");
-                if (!gameOver) {
-                    displayNextTurn();
-                }
+                if (!gameOver) {checkStaleMate()}
+                if (!gameOver) {displayNextTurn()}
             }         
         }
     }
@@ -117,18 +92,20 @@ function displayNextTurn() {
     }
 }
 
-function checkForWin() {
-    let tVar = turnVar + 1;
-    if ((bArray[1] === tVar && bArray[2] === tVar && bArray[3] === tVar) ||
-        (bArray[4] === tVar && bArray[5] === tVar && bArray[6] === tVar) ||
-        (bArray[7] === tVar && bArray[8] === tVar && bArray[9] === tVar) ||
-        (bArray[1] === tVar && bArray[4] === tVar && bArray[7] === tVar) ||
-        (bArray[2] === tVar && bArray[5] === tVar && bArray[8] === tVar) ||
-        (bArray[3] === tVar && bArray[6] === tVar && bArray[9] === tVar) ||
-        (bArray[1] === tVar && bArray[5] === tVar && bArray[9] === tVar) ||
-        (bArray[3] === tVar && bArray[5] === tVar && bArray[7] === tVar))
-        {
-            haveWinner();
+function checkForWin(valx) {
+    if ((bArray[1] === valx && bArray[2] === valx && bArray[3] === valx) ||
+        (bArray[4] === valx && bArray[5] === valx && bArray[6] === valx) ||
+        (bArray[7] === valx && bArray[8] === valx && bArray[9] === valx) ||
+        (bArray[1] === valx && bArray[4] === valx && bArray[7] === valx) ||
+        (bArray[2] === valx && bArray[5] === valx && bArray[8] === valx) ||
+        (bArray[3] === valx && bArray[6] === valx && bArray[9] === valx) ||
+        (bArray[1] === valx && bArray[5] === valx && bArray[9] === valx) ||
+        (bArray[3] === valx && bArray[5] === valx && bArray[7] === valx))
+        { 
+            return true;
+        }
+        else {
+            return false;
         }
 }
 
@@ -136,14 +113,15 @@ function haveWinner() {
     if (turnVar === 0) {
         playerMessage[0].innerHTML = 'Noughts wins!';
         noughts++;
-        noughtsScore.innerHTML = `Noughts score: ${noughts}`;
+        noughtsScore.innerHTML = `Noughts' score: ${noughts}`;
     }
     else {
         playerMessage[0].innerHTML = 'Crosses wins!';
         crosses++;
-        crossesScore.innerHTML = `Crosses score: ${crosses}`;
+        crossesScore.innerHTML = `Crosses' score: ${crosses}`;
     }
     gameOver = true;
+    console.log("have winner has run")
     reStarter();
 }
 
@@ -153,24 +131,27 @@ function checkStaleMate() {
             return;
         }
     }
-    playerMessage[0].innerHTML = "Nobody won. Super lame. Try harder next time people.";
+    playerMessage[0].innerHTML = "Nobody won. Super lame.";
     gameOver = true;
     reStarter();
 }
 
 function reStarter() {
     $.confirm({
+        icon: 'fa fa-gamepad',
         title: 'Game over!',
         content: 'Would you like to play this remarkable game again?',
         boxWidth: '350px',
         buttons: {
             yes: {
                 text: 'Of course I do',
+                btnClass: 'btn-green',
                 action: clearGame,
             },
             no: {
                 text: 'Nope',
-                action: goAwayNow
+                btnClass: 'btn-red',
+                action: badDecisions
             },
         }
     });
@@ -182,13 +163,26 @@ function clearGame() {
         document.getElementById(i).setAttribute("src", "images/basesquare.png");
     }
 
+    // reset vars
     gameOver = false;
     playerMessage[0].innerHTML = "Noughts goes first...";
-
-    // reset all vars
     bArray = [0,0,0,0,0,0,0,0,0,0];
     turnVar = 0;
-    tVar = 0;
+}
+
+function badDecisions() {
+    $.confirm({
+        icon: 'fa fa-meh-o',
+        content: 'I make bad decisions in life...',
+        boxWidth: '250px',
+        buttons: {
+            yes: {
+                text: 'Yes I do.',
+                btnClass: 'btn-purple',
+                action: goAwayNow,
+            },
+        }
+    });
 }
 
 function goAwayNow() {
@@ -201,22 +195,52 @@ function setupAI() {
 }
 
 function AImove() {
-    console.log("running");
-    emptySpaces = 0;
-    posCounter = 1;
-    bArrayBlanksCounter = 0;
-    for (let i4 = 1; i4 < bArray.length; i4++) {
+    let posCounter = 1;
+    let bArrayBlanksCounter = 0;
+
+    for (let i4 = 1; i4 <= bArray.length; i4++) {
         if (bArray[i4] === 0) {bArrayBlanksCounter++}
     }
-    var compMovex = getRandom(0,emptySpaces);
-    var compMove = Math.floor(compMovex);
-    for (let i5 = 1; i5 <= bArrayBlanksCounter; i5++) {
-        if ((bArray[i5] === 0) && (posCounter !== compMove)) {
+
+    // check for winning move
+    for (let i5 = 1; i5 < bArray.length; i5++) {
+        if (bArray[i5] === 0) {
+            bArray[i5] = 2;
+            if (checkForWin(turnVar + 1)) {
+                document.getElementById(i5.toString()).setAttribute("src","images/cross.png");
+                return;
+            }
+            else {
+                bArray[i5] = 0;
+            }
+        }
+    }
+
+    // check defensive move required
+    for (let i6 = 1; i6 < bArray.length; i6++) {
+        if (bArray[i6] === 0) {
+            bArray[i6] = 1;
+            if (checkForWin(turnVar)) {
+                document.getElementById(i6.toString()).setAttribute("src","images/cross.png");
+                bArray[i6] = 2;
+                return;
+            }
+            else {
+                bArray[i6] = 0;
+            }
+        }
+    }   
+
+    // default to play random move    
+    let compMove = Math.floor(getRandom(0,bArrayBlanksCounter)) + 1;
+    for (let i7 = 1; i7 <= bArray.length; i7++) {
+        if ((bArray[i7] === 0) && (posCounter !== compMove)) {
             posCounter++;
         }
-        else if ((bArray[i5] === 0) && (posCounter === compMove)) {
-            document.getElementById(i5.toString()).setAttribute("src","images/cross.png");
-            bArray[i5] = 2;
+        else if ((bArray[i7] === 0) && (posCounter === compMove)) {
+            document.getElementById(i7.toString()).setAttribute("src","images/cross.png");
+            bArray[i7] = 2;
+            return;
         }
     }
 }
@@ -229,8 +253,8 @@ function openPrompt() {
     $.confirm({
         icon: 'fa fa-gamepad',
         title: 'Welcome!',
-        content: 'What kind of game do you want?',
-        boxWidth: '400px',
+        content: 'What kind of setup would you like?',
+        boxWidth: '420px',
         buttons: {
             yes: {
                 btnClass: 'btn-blue',
