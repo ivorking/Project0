@@ -53,6 +53,11 @@ var crossesScore = document.getElementById("crosses");
 var noughts = 0;
 var crosses = 0;
 var playerMessage = document.getElementsByClassName("textToPlayer");
+var AIgame = false;
+var emptySpaces = 0;
+var posCounter = 1;
+var bArrayBlanksCounter = 0;
+
 playerMessage[0].innerHTML = "Noughts goes first...";
 
 function setListener() {
@@ -63,18 +68,40 @@ function setListener() {
 
 function clickChecker(i2) {
     if (!gameOver) {
-        if (bArray[i2] === 0 && turnVar === 0) {
-            document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
-            bArray[i2] = 1;
+        if (!AIgame) {
+            if (bArray[i2] === 0 && turnVar === 0) {
+                document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
+                bArray[i2] = 1;
+            }
+            else if (bArray[i2] === 0 && turnVar === 1) {
+                document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
+                bArray[i2] = 2;
+            }
+            checkForWin();
+            checkStaleMate();
+            if (!gameOver) {
+                displayNextTurn();
+            }            
         }
-        else if (bArray[i2] === 0 && turnVar === 1) {
-            document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
-            bArray[i2] = 2;
-        }
-        checkForWin();
-        checkStaleMate();
-        if (!gameOver) {
-            displayNextTurn();
+        else if (AIgame === true) {
+            if (bArray[i2] === 0 && turnVar === 0) {
+                document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
+                bArray[i2] = 1;
+                checkForWin();
+                checkStaleMate();
+                if (!gameOver) {
+                    displayNextTurn();
+                }
+                AImove();
+                console.log("stepped");
+                checkForWin();
+                console.log("stepped");
+                checkStaleMate();
+                console.log("stepped");
+                if (!gameOver) {
+                    displayNextTurn();
+                }
+            }         
         }
     }
 }
@@ -168,4 +195,55 @@ function goAwayNow() {
     window.location.replace("https://www.sadanduseless.com/2018/03/sad/");
 }
 
-setListener();
+function setupAI() {
+    AIgame = true;
+    setListener();
+}
+
+function AImove() {
+    console.log("running");
+    emptySpaces = 0;
+    posCounter = 1;
+    bArrayBlanksCounter = 0;
+    for (let i4 = 1; i4 < bArray.length; i4++) {
+        if (bArray[i4] === 0) {bArrayBlanksCounter++}
+    }
+    var compMovex = getRandom(0,emptySpaces);
+    var compMove = Math.floor(compMovex);
+    for (let i5 = 1; i5 <= bArrayBlanksCounter; i5++) {
+        if ((bArray[i5] === 0) && (posCounter !== compMove)) {
+            posCounter++;
+        }
+        else if ((bArray[i5] === 0) && (posCounter === compMove)) {
+            document.getElementById(i5.toString()).setAttribute("src","images/cross.png");
+            bArray[i5] = 2;
+        }
+    }
+}
+
+function getRandom(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function openPrompt() {
+    $.confirm({
+        icon: 'fa fa-gamepad',
+        title: 'Welcome!',
+        content: 'What kind of game do you want?',
+        boxWidth: '400px',
+        buttons: {
+            yes: {
+                btnClass: 'btn-blue',
+                text: 'Human vs Human',
+                action: setListener,
+            },
+            no: {
+                btnClass: 'btn-blue',
+                text: 'Human vs Computer',
+                action: setupAI
+            },
+        }
+    });
+}
+
+openPrompt();

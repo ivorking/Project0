@@ -1,21 +1,20 @@
-body {
-    color:     font-family: 'Itim', cursive;
+body {     
+    font-family: 'Itim', cursive;
     height: 100%;
     width: 100%;
     margin-left: 60px;
 }
 
-
 h1 {
-    text-shadow: 0 0 5px #FF0000;
+    text-shadow: 0 0 5px hsl(9, 100%, 50%);
     font-size: 35px;
 }
-
 
 div.gameBoard {
     display: inline-block;
     width: 780px;
     height: 600px;
+    margin-right: 150px;
 }
 
 div.gameBoard ul li {
@@ -28,12 +27,13 @@ div.scoreTrack {
     display: inline-block;
     position: absolute;
     right: 0px;
-    width: 200px;
+    width: 300px;
     height: 50px;
     text-align: right;
     vertical-align: top;
     padding: 0px;
-    font-size: 20px;
+    font-size: 25px;
+    color: blue;
 }
 
 li {
