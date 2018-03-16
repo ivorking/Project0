@@ -53,31 +53,47 @@ function clickChecker(i2) {
                 if (turnVar === 0) {
                     document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
                     bArray[i2] = 1;
-                }
-                else if (turnVar === 1) {
+                } else if (turnVar === 1) {
                     document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
                     bArray[i2] = 2;
                 }
-                if (checkForWin(turnVar + 1)) {haveWinner()};
-                if (!gameOver) {checkStaleMate()};
-                if (!gameOver) {displayNextTurn()};      
+                if (checkForWin(turnVar + 1)) {
+                    haveWinner();
+                }
+                if (!gameOver) {
+                    checkStaleMate();
+                }
+                if (!gameOver) {
+                    displayNextTurn();
+                }   
             }      
-        }
-        else if (AIgame) {
+        } else if (AIgame) {
             if ((bArray[i2] === 0) && (turnVar === 0)) {
                 document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
                 bArray[i2] = 1;
-                if (checkForWin(turnVar + 1)) {haveWinner()}
-                if (!gameOver) {checkStaleMate()}
-                if (!gameOver) {displayNextTurn()}
-                if (!gameOver) {AImove()}
+                if (checkForWin(turnVar + 1)) {
+                    haveWinner();
+                }
+                if (!gameOver) {
+                    checkStaleMate();
+                }
+                if (!gameOver) {
+                    displayNextTurn();
+                }
+                if (!gameOver) {
+                    AImove();
+                }
                 if (!gameOver) {
                     if (checkForWin(turnVar + 1)) {
                         haveWinner();
                     }
                 }
-                if (!gameOver) {checkStaleMate()}
-                if (!gameOver) {displayNextTurn()}
+                if (!gameOver) {
+                    checkStaleMate();
+                }
+                if (!gameOver) {
+                    displayNextTurn();
+                }
             }         
         }
     }
@@ -87,8 +103,7 @@ function displayNextTurn() {
     if (turnVar === 1) {
         playerMessage[0].innerHTML = "Noughts' turn";
         turnVar = 0;
-    }
-    else {
+    } else {
         playerMessage[0].innerHTML = "Crosses' turn";
         turnVar = 1;
     }
@@ -104,11 +119,9 @@ function checkForWin(valx) {
         (bArray[2] === valx && bArray[5] === valx && bArray[8] === valx) ||
         (bArray[3] === valx && bArray[6] === valx && bArray[9] === valx) ||
         (bArray[1] === valx && bArray[5] === valx && bArray[9] === valx) ||
-        (bArray[3] === valx && bArray[5] === valx && bArray[7] === valx))
-        { 
+        (bArray[3] === valx && bArray[5] === valx && bArray[7] === valx)) { 
             return true;
-        }
-        else {
+        } else {
             return false;
         }
 }
@@ -118,8 +131,7 @@ function haveWinner() {
         playerMessage[0].innerHTML = 'Noughts wins!';
         noughts++;
         noughtsScore.innerHTML = `Noughts' score: ${noughts}`;
-    }
-    else {
+    } else {
         playerMessage[0].innerHTML = 'Crosses wins!';
         crosses++;
         crossesScore.innerHTML = `Crosses' score: ${crosses}`;
@@ -202,7 +214,9 @@ function AImove() {
     let bArrayBlanksCounter = 0;
 
     for (let i4 = 1; i4 <= bArray.length; i4++) {
-        if (bArray[i4] === 0) {bArrayBlanksCounter++}
+        if (bArray[i4] === 0) {
+            bArrayBlanksCounter++;
+        }
     }
 
     // check for winning move
@@ -212,8 +226,7 @@ function AImove() {
             if (checkForWin(turnVar + 1)) {
                 document.getElementById(i5.toString()).setAttribute("src","images/cross.png");
                 return;
-            }
-            else {
+            } else {
                 bArray[i5] = 0;
             }
         }
@@ -227,8 +240,7 @@ function AImove() {
                 document.getElementById(i6.toString()).setAttribute("src","images/cross.png");
                 bArray[i6] = 2;
                 return;
-            }
-            else {
+            } else {
                 bArray[i6] = 0;
             }
         }
@@ -246,8 +258,7 @@ function AImove() {
     for (let i7 = 1; i7 <= bArray.length; i7++) {
         if ((bArray[i7] === 0) && (posCounter !== compMove)) {
             posCounter++;
-        }
-        else if ((bArray[i7] === 0) && (posCounter === compMove)) {
+        } else if ((bArray[i7] === 0) && (posCounter === compMove)) {
             document.getElementById(i7.toString()).setAttribute("src","images/cross.png");
             bArray[i7] = 2;
             return;
