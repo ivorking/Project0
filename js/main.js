@@ -253,6 +253,8 @@ function AImove() {
         return;
     }
 
+    // more rules can be added here to improve AI, e.g. https://en.wikipedia.org/wiki/Tic-tac-toe
+
     // default to play random move    
     let compMove = Math.floor(getRandom(0,bArrayBlanksCounter)) + 1;
     for (let i7 = 1; i7 <= bArray.length; i7++) {
