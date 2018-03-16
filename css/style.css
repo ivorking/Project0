@@ -13,6 +13,7 @@ h1 {
 }
 
 div.picinfo {
+    text-shadow: 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke;
     display: inline-block;
     position: absolute;
     right: 0px;
@@ -48,6 +49,7 @@ div.gameBoard ul li {
 }
 
 div.scoreTrack {
+    text-shadow: 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke;
     display: inline-block;
     position: absolute;
     right: 0px;
@@ -65,14 +67,10 @@ li {
 }
 
 div.textToPlayer {
+    text-shadow: 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke, 0 0 4px whitesmoke;
     font-size: 32px;
     font-weight: bold;
     color: blue;
-}
-
-div.wrapper {
-    width: 100%;
-    height: 100%;
 }
 
 .boardBackground {

@@ -49,17 +49,19 @@ function setListener() {
 function clickChecker(i2) {
     if (!gameOver) {
         if (!AIgame) {
-            if ((bArray[i2] === 0) && (turnVar === 0)) {
-                document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
-                bArray[i2] = 1;
-            }
-            else if ((bArray[i2] === 0) && (turnVar === 1)) {
-                document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
-                bArray[i2] = 2;
-            }
-            if (checkForWin(turnVar + 1)) {haveWinner()};
-            if (!gameOver) {checkStaleMate()};
-            if (!gameOver) {displayNextTurn()};            
+            if (bArray[i2] === 0) {
+                if (turnVar === 0) {
+                    document.getElementById(i2.toString()).setAttribute("src","images/nought.png");
+                    bArray[i2] = 1;
+                }
+                else if (turnVar === 1) {
+                    document.getElementById(i2.toString()).setAttribute("src","images/cross.png");
+                    bArray[i2] = 2;
+                }
+                if (checkForWin(turnVar + 1)) {haveWinner()};
+                if (!gameOver) {checkStaleMate()};
+                if (!gameOver) {displayNextTurn()};      
+            }      
         }
         else if (AIgame) {
             if ((bArray[i2] === 0) && (turnVar === 0)) {
@@ -93,6 +95,8 @@ function displayNextTurn() {
 }
 
 function checkForWin(valx) {
+
+// not happy with this nasty block of code - keen to hear suggestions on how to improve it
     if ((bArray[1] === valx && bArray[2] === valx && bArray[3] === valx) ||
         (bArray[4] === valx && bArray[5] === valx && bArray[6] === valx) ||
         (bArray[7] === valx && bArray[8] === valx && bArray[9] === valx) ||
@@ -121,7 +125,6 @@ function haveWinner() {
         crossesScore.innerHTML = `Crosses' score: ${crosses}`;
     }
     gameOver = true;
-    console.log("have winner has run")
     reStarter();
 }
 

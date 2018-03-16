@@ -6,7 +6,7 @@ This is the only Noughts and Crosses game that ever was made with this New York 
 
 Produced with the input and guidance from the wonderful **GA crew**.
 
-See comments in the code for the meaning of key variables etc.
+See comments in the code for definitions of key variables etc.
 
 TASK
 
