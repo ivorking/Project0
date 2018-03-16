@@ -4,7 +4,7 @@ This is an implementation of Noughts and Crosses, but now with a New York backgr
 
 This is the only Noughts and Crosses game that ever was made with this New York background. This wild claim is supported by no evidence whatsoever....
 
-Produced by Ivor King, with the input and guidance from the tremendous **GA crew**.
+Produced with the input and guidance from the wonderful **GA crew**.
 
 See comments in the code for the meaning of key variables etc.
 
@@ -20,13 +20,14 @@ Craft a readme.md file that explains your app to the world
 Technical Requirements
 
 Your app must:
-Render a game board in the browser
-Switch turns between X and O (or whichever markers you select)
-Visually display which side won if a player gets three in a row or show a draw/"cat’s game" if neither wins
-Include separate HTML / CSS / JavaScript files
-Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
-Use Javascript for DOM manipulation
-Deploy your game online, where the rest of the world can access it
-Use semantic markup for HTML and CSS (adhere to best practices)
+
+* Render a game board in the browser
+* Switch turns between X and O (or whichever markers you select)
+* Visually display which side won if a player gets three in a row or show a draw/"cat’s game" if neither wins
+* Include separate HTML / CSS / JavaScript files
+* Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
+* Use Javascript for DOM manipulation
+* Deploy your game online, where the rest of the world can access it
+* Use semantic markup for HTML and CSS (adhere to best practices)
 
 Enjoy...

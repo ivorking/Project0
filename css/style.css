@@ -16,7 +16,7 @@ div.picinfo {
     display: inline-block;
     position: absolute;
     right: 0px;
-    width: 330px;
+    width: 280px;
     height: 25px;
     text-align: right bottom;
     vertical-align: bottom;
@@ -24,6 +24,14 @@ div.picinfo {
     padding: 0px;
     font-size: 20x;
     color: blue;
+}
+
+img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 div.gameBoard {
@@ -56,6 +64,12 @@ li {
     list-style-type: none;
 }
 
+div.textToPlayer {
+    font-size: 32px;
+    font-weight: bold;
+    color: blue;
+}
+
 div.wrapper {
     width: 100%;
     height: 100%;
@@ -75,12 +89,6 @@ div.imagewrap {
     text-align: center;
     width: 100%;
     height: 100%;
-}
-
-div.textToPlayer {
-    font-size: 32px;
-    font-weight: bold;
-    color: blue;
 }
 
 .imagewrap::after {
